@@ -111,6 +111,24 @@ async function run() {
 
 
 
+  // DELETE a specific model by its ID
+    app.delete('/models/:id', async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+
+      // Try to delete the document
+      const result = await allAiCollection.deleteOne(filter);
+
+      if (result.deletedCount === 1) {
+        res.status(200).send({ message: 'Item deleted successfully' });
+      } else {
+        res.status(404).send({ message: 'Item not found' });
+      }
+    });
+
+
+ 
+  
 
 
    // await client.db("admin").command({ ping: 1 });
