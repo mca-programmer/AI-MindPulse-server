@@ -51,8 +51,24 @@ async function run() {
     res.send(result);
    })
 
-  
+  //get home data from mongo db
+  app.get("/allai",async(req,res)=>{
+    const cursor = allAiCollection.find().sort({createdAt:-1}).limit(6);
+    const result = await cursor.toArray();
+    res.send(result);
+  })
 
+
+
+  //GEt all modals
+
+  app.get("/allmodals",async(req,res)=>{
+    const cursor = allAiCollection.find();
+    const result = await cursor.toArray();
+    res.send(result);
+  })
+
+  
 
    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
