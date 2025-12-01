@@ -21,6 +21,20 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
+app.get('/', (req, res) => {
+  res.send('Hello server!')
+})
+
+
+async function run() {
+  try {
+    // await client.connect();
+
+    const db = client.db('ai_model');
+    const allAiCollection = db.collection("allAiCollection")
+     const purchaseColl = db.collection("purchaseColl");
+
+  
 
 
 
