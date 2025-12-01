@@ -169,6 +169,26 @@ app.post("/purchase", async (req, res) => {
 
 
 
+///update modal from all modal
+app.put("/update/:id",async(req,res)=>{
+  const id = req.params.id;
+  const updatefields = req.body;
+  const filter = {_id:new ObjectId(id)}
+  const result = await allAiCollection.updateOne(filter,{$set:updatefields});
+  res.send(result);
+} )
+
+
+
+//update from another collection
+app.put("purchase/update/:id",async(req,res)=>{
+  const id = req.params.id;
+  const updatefields = req.body;
+  const filter = {_id:new ObjectId(id)}
+  const result = await purchaseColl.updateOne(filter,{$set:updatefields});
+  res.send(result);
+} )
+
 
    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
