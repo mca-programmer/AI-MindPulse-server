@@ -128,7 +128,46 @@ async function run() {
 
 
  
+  // Post purchase data
+app.post("/purchase", async (req, res) => {
+  const data = req.query;
+ console.log(data.email);
+
+  const filter = { _id: new ObjectId(data.id) };
+
+  try {
   
+    const purchasedModel = await allAiCollection.findOne(filter);
+    if (!purchasedModel) {
+      return res.status(404).send({ message: 'Model not found' });
+    }
+
+   
+    const updatedModel = {
+      ...purchasedModel,
+      purchased: purchasedModel.purchased + 1 ,
+      purchasedby:data.email
+    };
+
+    await purchaseColl.insertOne(updatedModel); 
+
+   
+    await allAiCollection.updateOne(
+      filter,
+      { $inc: { purchased: 1 } } 
+    );
+
+    
+    res.send({ message: 'Purchase successful', model: updatedModel });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Something went wrong' });
+  }
+});
+
+
+
 
 
    // await client.db("admin").command({ ping: 1 });
