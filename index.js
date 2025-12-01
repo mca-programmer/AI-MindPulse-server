@@ -77,7 +77,42 @@ async function run() {
     res.send(result);
   })
 
-  
+  //get certai data for details
+  app.get("/models/:id", async(req,res) =>{
+      const id = req.params.id;
+        const filter = {_id: new ObjectId(id)}
+
+        const result = await allAiCollection.findOne(filter);
+        res.send(result);
+  })
+
+
+  //get my modals through email
+   app.get("/model/:email", async(req,res) =>{
+      const email = req.params.email;
+        const filter = {createdBy: email}
+
+        const result = await allAiCollection.find(filter).toArray();
+        res.send(result);
+  })
+
+
+
+
+
+  // get data through framework
+   app.get("/find/:framework", async(req,res) =>{
+      const framework = req.params.framework;
+        const filter = {framework: framework}
+
+        const result = await allAiCollection.find(filter).toArray();
+        res.send(result);
+  })
+
+
+
+
+
    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
