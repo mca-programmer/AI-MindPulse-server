@@ -69,7 +69,15 @@ async function run() {
   })
 
   
+//all purchase collection
+ app.get("/userpurchase/:purchasedby",async(req,res)=>{
+    const purchasedby = req.params.purchasedby;
+    const filter = {purchasedby:purchasedby}
+    const result = await purchaseColl.find(filter).toArray();
+    res.send(result);
+  })
 
+  
    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
