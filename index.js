@@ -22,7 +22,7 @@ const client = new MongoClient(uri, {
   }
 });
 app.get('/', (req, res) => {
-  res.send('Hello server!')
+  res.send('AI MindPulse server!')
 })
 
 
