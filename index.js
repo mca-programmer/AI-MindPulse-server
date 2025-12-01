@@ -35,7 +35,23 @@ async function run() {
      const purchaseColl = db.collection("purchaseColl");
 
   
+  //post all ai data
+   app.post("/allai",async(req,res) =>{
+    const newAi = req.body;
+    const result = await allAiCollection.insertOne(newAi);
+    res.send(result);
+   })
 
+
+  
+   //post my modal
+   app.post("/mymodal",async(req,res) =>{
+    const myAi = req.body;
+    const result = await allAiCollection.insertOne(myAi);
+    res.send(result);
+   })
+
+  
 
 
    // await client.db("admin").command({ ping: 1 });
